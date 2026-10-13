@@ -161,15 +161,20 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       // Cloud mode: a stored Supabase session wins. Its books are pulled from
       // the server (with the local cache as a fast fallback).
       if (CLOUD_ENABLED) {
-        const user = await getCloudUser();
-        if (user && active) {
-          userIdRef.current = user.id;
-          setSession(user.email);
-          const restored = await loadForCloudUser(user);
-          if (!active) return;
-          setProgress(restored);
-          setReady(true);
-          return;
+        try {
+          const user = await getCloudUser();
+          if (user && active) {
+            userIdRef.current = user.id;
+            setSession(user.email);
+            const restored = await loadForCloudUser(user);
+            if (!active) return;
+            setProgress(restored);
+            setReady(true);
+            return;
+          }
+        } catch {
+          // A backend hiccup must never strand a visitor on the splash screen:
+          // fall through and open the app on local storage instead.
         }
       }
 

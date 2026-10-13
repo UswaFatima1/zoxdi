@@ -22,13 +22,19 @@ let client: SupabaseClient | null = null;
 export function getSupabase(): SupabaseClient | null {
   if (!CLOUD_ENABLED) return null;
   if (!client) {
-    client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-        detectSessionInUrl: true,
-      },
-    });
+    try {
+      client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true,
+        },
+      });
+    } catch {
+      // A bad configuration must never take the whole app down. Without a
+      // client every cloud call is skipped and local accounts keep working.
+      return null;
+    }
   }
   return client;
 }
