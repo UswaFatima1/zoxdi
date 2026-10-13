@@ -1,0 +1,13 @@
+# Cloudflare deploy config.
+#
+# Zoxdi is a *static* build: `npm run build` writes plain HTML/CSS/JS into ./out
+# (see `output: "export"` in next.config.mjs). There is no Node server, so this
+# tells Wrangler to serve that folder as static assets instead of looking for a
+# Next.js server bundle (the .next/standalone/... error).
+
+name = "zoxdi"
+compatibility_date = "2026-01-01"
+
+[assets]
+directory = "./out"
+not_found_handling = "404-page"
