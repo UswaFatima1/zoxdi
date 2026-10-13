@@ -42,6 +42,12 @@ describe("cloud configuration", () => {
     expect(config.CLOUD_ENABLED).toBe(false);
   });
 
+  it("reduces a pasted REST endpoint to the project origin", async () => {
+    const config = await loadConfig("https://abcdefghijklm.supabase.co/rest/v1/", REAL_KEY);
+    expect(config.SUPABASE_URL).toBe(REAL_URL);
+    expect(config.CLOUD_ENABLED).toBe(true);
+  });
+
   it("survives a value pasted with a stray space", async () => {
     const config = await loadConfig(` ${REAL_URL} `, ` ${REAL_KEY} `);
     expect(config.CLOUD_ENABLED).toBe(true);
