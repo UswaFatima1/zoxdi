@@ -37,9 +37,9 @@ function Splash() {
       <div className="animate-float">
         <Logo size={56} />
       </div>
-      <p className="text-sm font-bold uppercase tracking-wide text-ink-muted">
+      <h1 className="text-sm font-bold uppercase tracking-wide text-ink-muted">
         Zoxdi
-      </p>
+      </h1>
     </div>
   );
 }
