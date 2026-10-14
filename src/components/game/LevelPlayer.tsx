@@ -43,6 +43,7 @@ import type { ConceptId } from "@/lib/learning/concepts";
 import { formatMoney } from "@/lib/accounting/engine";
 import { playSfx } from "@/lib/fx/sound";
 import { Confetti } from "@/components/fx/Confetti";
+import { ShareScore } from "@/components/share/ShareScore";
 
 const MODE_PROMPT: Record<Level["mode"], string> = {
   forge: "Build the journal entry",
@@ -299,7 +300,7 @@ function checkSort(
 }
 
 export function LevelPlayer({ levelId }: { levelId: string }) {
-  const { progress, update, lang } = useProgressContext();
+  const { progress, update, lang, profile } = useProgressContext();
   const level = LEVEL_BY_ID[levelId];
 
   const [lines, setLines] = useState<EntryLine[]>([]);
@@ -710,6 +711,20 @@ export function LevelPlayer({ levelId }: { levelId: string }) {
             </div>
           ) : null}
         </div>
+      ) : null}
+
+      {/* Sharing: the score card and the link that dares a friend */}
+      {check?.correct ? (
+        <ShareScore
+          name={profile?.name ?? "A player"}
+          avatar={profile?.avatar}
+          xp={progress.xp.total}
+          levels={progress.completedLevelIds.length}
+          streak={progress.streak.current}
+          levelLabel={`Level ${level.order}`}
+          headline={`Level ${level.order} mastered`}
+          subline={level.title}
+        />
       ) : null}
 
       {/* Concept chips */}

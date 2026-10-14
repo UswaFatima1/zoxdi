@@ -20,7 +20,9 @@ export function ProfileGate({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (ready && !profile && !onLogin) {
-      router.replace("/login/");
+      // Keep the query string, so a "beat me" link still works after the detour.
+      const search = typeof window === "undefined" ? "" : window.location.search;
+      router.replace(`/login/${search}`);
     }
   }, [ready, profile, onLogin, router]);
 

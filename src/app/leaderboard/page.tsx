@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Avatar } from "@/components/layout/Avatar";
+import { ShareScore } from "@/components/share/ShareScore";
 import { LEADERBOARD_COHORT } from "@/data/leaderboard";
 import { rankMedal, rankPlayers } from "@/lib/learning/xp";
 import { useProgressContext } from "@/lib/storage/ProgressContext";
@@ -191,6 +192,17 @@ export default function LeaderboardPage() {
               You are top of the board. Defend it one level at a time.
             </p>
           )}
+
+          <ShareScore
+            variant="compact"
+            name={you.name}
+            avatar={profile?.avatar}
+            xp={you.xp}
+            levels={you.masteredLevels}
+            streak={progress.streak.current}
+            headline={`#${you.rank} on the leaderboard`}
+            subline="Accounting, taught as a game"
+          />
         </div>
       ) : (
         <div

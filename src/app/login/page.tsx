@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Avatar } from "@/components/layout/Avatar";
 import { MiniDemo } from "@/components/learning/MiniDemo";
+import { ChallengeBanner } from "@/components/share/ChallengeBanner";
 import { useProgressContext } from "@/lib/storage/ProgressContext";
 import { initialsFromName } from "@/lib/storage/progress";
 import { accountExists, hasAccounts, isValidEmail, MIN_PASSWORD_LENGTH } from "@/lib/storage/accounts";
@@ -177,7 +178,8 @@ export default function LoginPage() {
         </div>
 
         {/* The welcome card */}
-        <div className="animate-slide-up lg:sticky lg:top-24">
+        <div className="animate-slide-up space-y-4 lg:sticky lg:top-24">
+          <ChallengeBanner />
           <div className="grad-ring overflow-hidden rounded-xl3 border border-line/60 bg-paper-card p-7 shadow-lift sm:p-8">
             {/* Log in / Sign up switch */}
             <div className="grid grid-cols-2 gap-1 rounded-full border border-line bg-paper-sunken/60 p-1">
