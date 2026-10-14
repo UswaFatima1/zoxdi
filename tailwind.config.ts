@@ -138,6 +138,10 @@ const config: Config = {
           "60%": { transform: "translateX(-4px)" },
           "80%": { transform: "translateX(4px)" },
         },
+        sweep: {
+          "0%": { transform: "translateX(-10%)" },
+          "60%,100%": { transform: "translateX(320%)" },
+        },
       },
       animation: {
         float: "float 4s ease-in-out infinite",
@@ -153,6 +157,7 @@ const config: Config = {
         "slide-in-right": "slide-in-right 0.35s cubic-bezier(0.22,1,0.36,1) both",
         "float-up": "float-up 1.1s cubic-bezier(0.22,1,0.36,1) both",
         shake: "shake 0.4s ease-in-out",
+        sweep: "sweep 3.2s ease-in-out infinite",
       },
     },
   },
